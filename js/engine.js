@@ -78,9 +78,37 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        updateEntities(dt);
-        // checkCollisions();
+        
+        function checkCollisions() {
+            for (var i = 0; i < allEnemies.length; i++) {
+                if (player.pos[0] < allEnemies[i].pos[0] + allEnemies[i].hitbox[1]  && player.pos[0] + player.hitbox[1]  > allEnemies[i].pos[0] &&
+					player.pos[1] < allEnemies[i].pos[1] + allEnemies[i].hitbox[0] && player.pos[1] + player.hitbox[0] > allEnemies[i].pos[1]) {
+                    for (var k = 0; k< allBoosters.length; k++) {
+                        allBoosters.splice(k, 3);
+                        k--;
+                }
+                player.pos = [215, 460];
+                score = 0;
+                allBoosters.push(new Booster(80, 240), new Booster(280, 350), new Booster(380, 170));
+                ctx.canvas.width = ctx.canvas.width;
+            }
+        }
+        for (var j = 0; j < allBoosters.length; j++) {
+            if (player.pos[0] < allBoosters[j].pos[0] + allBoosters[j].hitbox[1]  && player.pos[0] + player.hitbox[1]  > allBoosters[j].pos[0] &&
+					player.pos[1] < allBoosters[j].pos[1] + allBoosters[j].hitbox[0] && player.pos[1] + player.hitbox[0] > allBoosters[j].pos[1]) {
+                
+                allBoosters.splice(j, 1);
+                j++;
+                score += 20;
+                ctx.canvas.width = ctx.canvas.width;
+            }
+        }
+    
     }
+              
+             updateEntities(dt);
+         checkCollisions(); 
+}
 
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -151,6 +179,10 @@ var Engine = (function(global) {
          */
         allEnemies.forEach(function(enemy) {
             enemy.render();
+        });
+        
+        allBoosters.forEach(function(booster) {
+            booster.render();
         });
 
         player.render();
