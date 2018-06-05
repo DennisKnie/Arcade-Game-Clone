@@ -95,8 +95,11 @@ Booster.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+const allBoosters = [new Booster(80, 240), new Booster(280, 350), new Booster(380, 170)];
+const allEnemies = [new Enemy(-100, 300, 250), new Enemy(-300, 380, 150), new Enemy(-500, 220, 350), new Enemy(-700, 130, 420)];
+const player = new Player(215, 460);
 
-
+let score = 0;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
