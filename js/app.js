@@ -65,6 +65,33 @@ Player.prototype.update = function(dt) {
     }
 };
 
+Player.prototype.handleInput = function(keys) {
+    switch(keys) {
+        case 'left':
+            this.pos[0] = this.pos[0] - 50;
+            break;
+        case 'right':
+            this.pos[0] = this.pos[0] + 50;
+            break;
+        case 'down':
+            this.pos[1] = this.pos[1] + 50;
+            break;
+        case 'up':
+            this.pos[1] = this.pos[1] - 50;
+            break;
+    }
+};
+
+let Booster = function(x, y) {
+    this.sprite = 'images/gem-orange.png';
+    this.pos = [x, y];
+    this.hitbox = [30, 70];
+};
+
+Booster.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.pos[0], this.pos[1]);
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
