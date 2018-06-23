@@ -124,8 +124,6 @@ var Menu = new function() {
      */
     function drawRoundedRectanle(x, y, width, height, r) {
 
-        //console.log(ctx.fillStyle);
-
         ctx.beginPath();
         ctx.moveTo(x + r, y);
         ctx.lineTo(x + width - r, y);
